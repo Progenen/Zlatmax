@@ -1,61 +1,80 @@
 @function str-replace($string, $search, $replace: "") {
+    $index: str-index($string, $search);
 
-  $index: str-index($string, $search);
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace +
+            str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
 
-  @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
-  }
-
-  @return $string;
+    @return $string;
 }
 
 @mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
-  $src: null;
+    $src: null;
 
-  $extmods: (
-    eot: "?",
-    svg: "#" + str-replace($name, " ", "_")
-  );
+    $extmods: (
+        eot: "?",
+        svg: "#" + str-replace($name, " ", "_"),
+    );
 
-  $formats: (
-    otf: "opentype",
-    ttf: "truetype"
-  );
+    $formats: (
+        otf: "opentype",
+        ttf: "truetype",
+    );
 
-  @each $ext in $exts {
-    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
-    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-    $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
-  }
+    @each $ext in $exts {
+        $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+        $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+        $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+    }
 
-  @font-face {
-    font-family: quote($name);
-    font-weight: $weight;
-    font-style: $style;
+    @font-face {
+        font-family: quote($name);
+        font-weight: $weight;
+        font-style: $style;
 
-    // font-display: block;
-    src: $src;
-  }
+        // font-display: block;
+        src: $src;
+    }
 }
 
 // Fonts
-@include font-face('Montserrat', '../fonts/Montserrat/Montserrat-Bold', 700, normal, ttf);
-@include font-face('Montserrat', '../fonts/Montserrat/Montserrat-Bold', 500, normal, ttf);
-@include font-face('Montserrat', '../fonts/Montserrat/Montserrat-Bold', 600, normal, ttf);
+@include font-face("Montserrat", "../fonts/Montserrat/Montserrat-Bold", 700, normal, ttf);
+@include font-face("Montserrat", "../fonts/Montserrat/Montserrat-Medium", 500, normal, ttf);
+@include font-face("Montserrat", "../fonts/Montserrat/Montserrat-SemiBold", 600, normal, ttf);
 
 // Vars
 $black: #141414;
-$orange: #E8AA31;
+$orange: #e8aa31;
 
 // Путь к спрайту для конкатенации
 $sprite: "../svg/dest/stack/sprite.svg#";
 
+$maxWidthСontainer: 1630; // Максимальный размер контейнера (при отзывчивой вёрстке))
+$maxWidth: 1920; // Ширина макета
 
 // Mixins
 
+@mixin adaptiveValue($property, $startSize, $minSize, $type) {
+    $addSize: $startSize - $minSize;
+    @if $type==1 {
+        #{$property}: $startSize + px;
+        @media (max-width:#{$maxWidthContainer + px}){
+            #{$property} : calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}))
+        }
+    } @else if type==2 {
+        #{$property}: $startSize + px;
+        @media (max-width:#{$maxWidthContainer + px}){
+            #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+        }
+    } @else {
+        #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+}
+
 @mixin title {
-  font-family: Oswald;
-  text-transform: uppercase;
+    font-family: Oswald;
+    text-transform: uppercase;
 }
 
 @mixin btn {

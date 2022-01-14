@@ -14,7 +14,6 @@ const gulpIf = require('gulp-if');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 
-
 const isDevelopment = process.env.NODE_ENV == 'development' ? true : false; // Check work mode | Смотрим какой режим разработки выбран
 const dir = 'dist'; // Output | Папка с конечными файлами
 
@@ -70,8 +69,8 @@ function scripts() {
 function startWatch() {
     watch(['src/sass/**/*.+(scss|sass)'], style);
     watch(['src/JS/**/*.js', '!src/**/*.min.js'], scripts);
-    watch(['src/*.html'], html);
-    watch(['src/*.html']).on('change', browserSync.reload);
+    watch(['src/**/*.html'], html);
+    watch(['src/**/*.html']).on('change', browserSync.reload);
     watch(['src/images/**/*'], images);
     watch(['src/svg/src/**/*'], svgsprite);
     watch(['src/fonts/**/*'], fonts);
