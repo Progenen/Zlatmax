@@ -33,4 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
             })
         }
     }
+
+    const newModal = new MinModalJS('.modal-city', {
+        buttonsActive: '.modal-city-open',
+        buttonsDisActive: '.modal-city-close',
+        keyOpen: 'Escape', // Or false
+        modalOutsideClick: true // if true, modal closed when you click outside content modal
+    });
+
 });

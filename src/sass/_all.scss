@@ -15,7 +15,6 @@ body,
 html {
     height: 100%;
     overflow-x: hidden;
-    font-size: 16rem;
 }
 
 a {
@@ -32,10 +31,15 @@ a {
 
 .content {
     flex: 1 0 auto;
+    height: 100%;
 }
 
 .row {
     display: flex;
+}
+
+.col {
+    padding: 0 15px;
 }
 
 .container {
@@ -47,4 +51,78 @@ a {
 
 footer {
     flex: 0 0 auto;
+}
+
+.tabs-hide {
+    display: none;
+}
+
+.tabs-show {
+    display: block;
+}
+
+.text {
+    &_normal {
+        font-size: 16px;
+    }
+    &_small {
+        font-size: 14px;
+    }
+    &_medium {
+        font-size: 18px;
+    }
+    &_big {
+        font-size: 20px;
+    }
+}
+
+.modal-city {
+    background: #ECF1F2;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    &__close {
+        cursor: pointer;
+        text-align: right;
+        font-weight: 600;
+    }
+
+    &__search {
+        width: 100%;
+        margin: 10px 0 0 0;
+        padding: 12px 10px;
+        background-color: #e5e9ea;
+        border-radius: 3px;
+        border: 1px solid #757777;
+        font-family: Montserrat;
+        font-weight: 500;
+        &:focus {
+            outline: none;
+        }
+        &::placeholder {
+            font-family: Montserrat;
+            font-weight: 500;
+        }
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+    }
+
+    &__item {
+        cursor: pointer;
+        margin: 10px 0 0 0;
+        padding: 5px;
+        transition: .2s;
+        &:hover {
+            opacity: .7;
+        }
+    }
 }

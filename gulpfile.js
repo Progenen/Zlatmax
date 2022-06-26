@@ -1,9 +1,9 @@
 const { src, dest, watch, series, parallel } = require('gulp');
 const browserSync = require('browser-sync');
-const sass = require('gulp-sass');                                      
+const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
 const autoprefixer = require('gulp-autoprefixer');
-const sprite       = require('gulp-svg-sprite');
+const sprite = require('gulp-svg-sprite');
 const rename = require("gulp-rename");
 const imagemin = require('gulp-imagemin');
 const newer = require('gulp-newer');
@@ -54,15 +54,18 @@ function html() {
 function scripts() {
     return src([
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
+        'node_modules/min-modal-js/min-modal-js.js',
+        'src/JS/libs/targets-lib.js',
+        'src/JS/libs/tabs.js',
         'src/JS/libs/jquery-3.6.0.min.js',
         'src/JS/libs/slick.js',
         'src/JS/index.js'
     ])
-    .pipe(gulpIf(isDevelopment, sourcemaps.init())) // Инициализация source-maps (Работает только в режиме разработки) | Source-maps initialization (Only works in development mode)
-    .pipe(concat('bundle.js'))
-    .pipe(uglify())
-    .pipe(gulpIf(isDevelopment, sourcemaps.write())) // Запись source-maps (Работает только в режиме разработки) | Source-maps entry (Only works in development mode)
-    .pipe(dest(dir + '/JS/'))
+        .pipe(gulpIf(isDevelopment, sourcemaps.init())) // Инициализация source-maps (Работает только в режиме разработки) | Source-maps initialization (Only works in development mode)
+        .pipe(concat('bundle.js'))
+        .pipe(uglify())
+        .pipe(gulpIf(isDevelopment, sourcemaps.write())) // Запись source-maps (Работает только в режиме разработки) | Source-maps entry (Only works in development mode)
+        .pipe(dest(dir + '/JS/'))
 }
 
 // Наблюдаем за всеми изменениями (gulp-watch) | Watch all changes (gulp-watch)
@@ -89,21 +92,45 @@ function images() {
 //video to dev/prod
 function video() {
     return src('src/video/**/*')
-           .pipe(dest(dir + '/video/'))
+        .pipe(dest(dir + '/video/'))
 }
 
 // Спрайт для векторной графики
 function svgsprite() {
     return src('src/svg/src/**/*')
-           .pipe(sprite({
-              mode: {
+        .pipe(sprite({
+            shape: {
+                dimension: {
+                    maxWidth: 500,
+                    maxHeight: 500
+                },
+                spacing: {
+                    padding: 0
+                },
+                transform: [{
+                    "svgo": {
+                        "plugins": [
+                            { removeViewBox: false },
+                            { removeUnusedNS: false },
+                            { removeUselessStrokeAndFill: true },
+                            { cleanupIDs: false },
+                            { removeComments: true },
+                            { removeEmptyAttrs: true },
+                            { removeEmptyText: true },
+                            { collapseGroups: true },
+                            { removeAttrs: { attrs: '(fill|stroke|style)' } }
+                        ]
+                    }
+                }]
+            },
+            mode: {
                 stack: {
                     sprite: 'sprite.svg'  // sprite file name
                 }
-              },
-           }))
-           .pipe(dest(dir + '/svg/dest/'))
-  }
+            },
+        }))
+        .pipe(dest(dir + '/svg/dest/'))
+}
 
 // Удаление картинок в выходной папке, если те удалены в входящей | Deleting pictures in the output folder, if they were deleted in the input
 function cleanImg() {
