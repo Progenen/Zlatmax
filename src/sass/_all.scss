@@ -126,3 +126,15 @@ footer {
         }
     }
 }
+
+@media (max-width:1400px){
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width:1200px){
+    html {
+        font-size: 8px;
+    }
+}
