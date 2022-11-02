@@ -55,6 +55,10 @@ $maxWidth: 1920; // Ширина макета
 
 // Mixins
 
+@function rem($size) {
+    @return ($size / 14)+rem
+}
+
 @mixin adaptiveValue($property, $startSize, $minSize, $type) {
     $addSize: $startSize - $minSize;
     @if $type==1 {

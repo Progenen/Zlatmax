@@ -33,4 +33,45 @@ document.addEventListener('DOMContentLoaded', function () {
             })
         }
     }
+
+    // Function to responive 
+
+    function responsive(width) {
+        if (document.body.clientWidth < width) {
+            return true;
+        }
+    }
+
+    // modal for city choose 
+
+    const newModal = new MinModalJS('.modal-city', {
+        buttonsActive: '.modal-city-open',
+        buttonsDisActive: '.modal-city-close',
+        keyOpen: 'Escape', // Or false
+        modalOutsideClick: true // if true, modal closed when you click outside content modal
+    });
+
+    // Adaptive menu
+
+    const menuTabs = new Tabs('')
+
+    if (responsive(860)) {
+        const nav = document.querySelector('.adaptive');
+        const cabinet = document.querySelector('.header__cabinet');
+        const navNew = document.querySelector('.header__top-row');
+        const mobMenu = document.querySelectorAll('.mobile-menu');
+        const topNav = document.querySelector('.menu');
+        const mobMenuClose = document.querySelectorAll('.mobile-menu__close');
+        
+        mobMenuClose.forEach((element, i) => {
+            element.addEventListener('click', () => {
+                mobMenu.forEach(element => element.classList.remove('active'));
+            })
+        });
+
+        mobMenu[0].append(topNav);
+        nav.append(cabinet);  
+        navNew.append(nav);
+    }
+
 });

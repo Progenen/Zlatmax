@@ -9,6 +9,7 @@
     "console-control-strings": "^1.1.0",
     "extend": "^3.0.2",
     "jquery": "^3.6.0",
+    "min-modal-js": "^1.0.4",
     "mkdirp": "^1.0.4",
     "request-progress": "^3.0.0",
     "slick-carousel": "^1.8.1",
