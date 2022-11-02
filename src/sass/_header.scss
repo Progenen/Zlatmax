@@ -288,7 +288,7 @@
     &__bottom {
         background-color: $black;
         color: #fff;
-        padding: 0 15px;
+        padding: 24px 15px 0 15px;
     }
 
     &__bottom-menu {}
@@ -314,7 +314,7 @@
         color: #fff;
         font-weight: 500;
         text-decoration: none;
-        padding: 10px 0;
+        padding: 10px 0 23px 0;
         display: inline-block;
         border-bottom: 2px solid transparent;
         transition: .2s;
@@ -326,7 +326,7 @@
         }
         
         &:first-child {
-            padding: 0 0 10px 0;
+            padding: 0 0 23px 0;
         }
     }
 
@@ -360,7 +360,7 @@
     }
 
     &__bottom-submenu-title {
-        font-size: 16px;
+        font-size: rem(16);
         font-weight: 600;
         margin: 0 0 30px 0;
     }
@@ -589,21 +589,31 @@
         &__bottom-submenu .row {
             flex-direction: column;
         }
+
+        &__bottom-link {
+            font-size: 16px;
+        }
     }
 
     .menu {
         &__list {
             flex-direction: column;
+            gap: 0;
         }
         &__catalog {
             display: block;
         }
         &__item {
-            margin: 18px 0;
+            margin: 10px 0;
             padding: 0;
+            font-size: 18px;
             &:first-child {
-                margin: 0 0 18px 0;
+                margin: 0 0 10px 0;
             }
+        }
+
+        &__link {
+            font-size: 18px;
         }
     } 
 
@@ -659,8 +669,9 @@
     }
     &__back {
         color: #fff;
-        font-size: rem(16);
+        font-size: 16px;
         display: flex;
         align-items: center;
     }
 }
+
