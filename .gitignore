@@ -1,5 +1,5 @@
 $ cat .gitignore
 
 /node_modules
-/diss
+/dist
 package-lock.json
