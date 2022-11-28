@@ -55,11 +55,11 @@ function scripts() {
     return src([
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/min-modal-js/min-modal-js.js',
-        'src/JS/libs/targets-lib.js',
         'src/JS/libs/tabs.js',
         'src/JS/libs/jquery-3.6.0.min.js',
         'src/JS/libs/slick.js',
-        'src/JS/index.js'
+        'src/JS/index.js',
+        'src/JS/libs/targets-lib.js'
     ])
         .pipe(gulpIf(isDevelopment, sourcemaps.init())) // Инициализация source-maps (Работает только в режиме разработки) | Source-maps initialization (Only works in development mode)
         .pipe(concat('bundle.js'))

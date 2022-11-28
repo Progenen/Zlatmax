@@ -53,25 +53,66 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Adaptive menu
 
-    const menuTabs = new Tabs('')
-
     if (responsive(860)) {
         const nav = document.querySelector('.adaptive');
         const cabinet = document.querySelector('.header__cabinet');
         const navNew = document.querySelector('.header__top-row');
         const mobMenu = document.querySelectorAll('.mobile-menu');
+        const menuCatalog = document.querySelectorAll('.menu__catalog', 'burger-menu');
+        const menuCatalogText = document.querySelector('.menu__catalog-text_md');
+        const MenuCatalogContents = document.querySelectorAll('.menu__catalog-content')
+        const bottomMenuItems = document.querySelectorAll('.header__bottom-item');
+        const subMenu = document.querySelectorAll('.header__bottom-item');
         const topNav = document.querySelector('.menu');
         const mobMenuClose = document.querySelectorAll('.mobile-menu__close');
-        
-        mobMenuClose.forEach((element, i) => {
-            element.addEventListener('click', () => {
-                mobMenu.forEach(element => element.classList.remove('active'));
+
+        menuCatalog.forEach((element, i) => {
+            let item = document.createElement('div');
+            item.classList.add('mobile-menu');
+            item.innerHTML = `
+            <div class="mobile-menu__header">
+                <div class="mobile-menu__back" id="back${i}">
+                    <svg class="mobile-menu__back-icon">
+                        <use xlink:href='svg/dest/stack/sprite.svg#arrow-left'></use>
+                    </svg>
+                    Назад
+                </div>
+                <div class="mobile-menu__close">
+                    <svg class="mobile-menu__close-icon">
+                        <use xlink:href='svg/dest/stack/sprite.svg#plus'></use>
+                    </svg>
+                </div>
+            </div>
+            `;
+            item.append(MenuCatalogContents[i]);
+            if (element.querySelector('.menu__catalog-text')) {
+                element.querySelector('.menu__catalog-text').removeAttribute('data-target');
+                element.querySelector('.menu__catalog-text').removeAttribute('data-target-type');
+    
+                element.removeAttribute('data-target', 'data-target-type');
+                element.querySelector('.menu__catalog-text').addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+
+            }
+            item.querySelector('.mobile-menu__back').addEventListener('click', () => {
+                item.classList.toggle('active');
+            })
+            
+            document.querySelector('html').append(item);
+        });
+
+        mobMenuClose.forEach(element => {
+            element.addEventListener('click', () =>{
+                mobMenu.forEach(element => {
+                    element.classList.remove('active');
+                });
             })
         });
 
         mobMenu[0].append(topNav);
+        mobMenu[0].querySelector('.menu__list').append(menuCatalogText);
         nav.append(cabinet);  
         navNew.append(nav);
-    }
-
+    };
 });

@@ -50,14 +50,14 @@ $orange: #e8aa31;
 // Путь к спрайту для конкатенации
 $sprite: "../svg/dest/stack/sprite.svg#";
 
-$maxWidthСontainer: 1630; // Максимальный размер контейнера (при отзывчивой вёрстке))
+$maxWidthСontainer: 1620; // Максимальный размер контейнера (при отзывчивой вёрстке))
 $maxWidth: 1920; // Ширина макета
 
 // Mixins
 
-@function rem($size) {
-    @return calc($size / 14)+rem
-}
+    @function rem($size) {
+        @return calc($size / 14)+rem
+    }
 
 @mixin adaptiveValue($property, $startSize, $minSize, $type) {
     $addSize: $startSize - $minSize;

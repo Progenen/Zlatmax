@@ -11,6 +11,10 @@ body {
     color: $black;
 }
 
+html {
+    font-size: 14px;
+}
+
 body,
 html {
     height: 100%;
@@ -60,19 +64,18 @@ footer {
 .tabs-show {
     display: block;
 }
-
 .text {
     &_normal {
-        font-size: 16px;
+        font-size: rem(16);
     }
     &_small {
-        font-size: 14px;
+        font-size: rem(14);
     }
     &_medium {
-        font-size: 18px;
+        font-size: rem(18);
     }
     &_big {
-        font-size: 20px;
+        font-size: rem(20);
     }
 }
 
@@ -133,7 +136,25 @@ footer {
     }
 }
 
-@media (max-width:1200px){
+@media (max-width:1230px){
+    html {
+        font-size: 11px;
+    }
+}
+
+@media (max-width:1132px){
+    html {
+        font-size: 10px;
+    }
+}
+
+@media (max-width:1100px){
+    html {
+        font-size: 9px;
+    }
+}
+
+@media (max-width:960px){
     html {
         font-size: 8px;
     }
