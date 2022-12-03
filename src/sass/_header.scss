@@ -530,6 +530,10 @@
 @media (max-width:860px) {
     .header {
 
+        &__bottom {
+            display: none;
+        }
+
         &__col-lg {
             flex: 0 1 100%;
             width: 100%;
