@@ -84,17 +84,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             </div>
             `;
-            item.append(MenuCatalogContents[i]);
-            if (element.querySelector('.menu__catalog-text')) {
-                element.querySelector('.menu__catalog-text').removeAttribute('data-target');
-                element.querySelector('.menu__catalog-text').removeAttribute('data-target-type');
-    
-                element.removeAttribute('data-target', 'data-target-type');
-                element.querySelector('.menu__catalog-text').addEventListener('click', () => {
-                    item.classList.toggle('active');
-                });
-
-            }
+            item.append(element.querySelector('.menu__catalog-content'));
+            console.log(element);
+            element.querySelector('.menu__catalog-text').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
             item.querySelector('.mobile-menu__back').addEventListener('click', () => {
                 item.classList.toggle('active');
             })
